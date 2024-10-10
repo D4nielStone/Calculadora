@@ -19,4 +19,21 @@
       <Filter>Arquivos de Origem</Filter>
     </ClCompile>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="assets\shaders\imagem.frag" />
+    <None Include="assets\shaders\imagem.vert" />
+    <None Include="assets\shaders\linha.vert" />
+    <None Include="assets\shaders\quad.frag" />
+    <None Include="assets\shaders\quad.vert" />
+    <None Include="assets\shaders\texto.frag" />
+    <None Include="assets\shaders\texto.vert" />
+    <None Include="assets\shaders\linha.frag" />
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="assets\fontes\consolas\Consola.ttf" />
+    <Font Include="assets\fontes\consolas\CONSOLAB.TTF" />
+    <Font Include="assets\fontes\consolas\consolai.ttf" />
+    <Font Include="assets\fontes\consolas\Consolas.ttf" />
+    <Font Include="assets\fontes\consolas\consolaz.ttf" />
+  </ItemGroup>
 </Project>
