@@ -1,0 +1,60 @@
+#include "src/ui/painel/painel.hpp"
+#include "src/ui/widgets/caixa_de_texto.hpp"
+
+GLFWwindow *janela;
+std::shared_ptr<BubbleUI::Contexto> contextoUI;
+
+static void defInputs(Bubble::Inputs::Inputs* inp)
+{
+	glfwSetWindowUserPointer(janela, inp);
+	glfwSetCursorPosCallback(janela, mousePosCallBack);
+	glfwSetKeyCallback(janela, callbackKey);
+	glfwSetMouseButtonCallback(janela, mouseButtonCallBack);
+	glfwSetCharCallback(janela, charCallback);
+}
+static void iniciar()
+{
+	auto inputs = std::make_shared<Bubble::Inputs::Inputs>();
+	contextoUI = std::make_shared<BubbleUI::Contexto>();
+
+	if (!glfwInit())
+		return;
+	
+	janela = glfwCreateWindow(400, 600, "Calculadora", NULL, NULL);
+
+	glfwMakeContextCurrent(janela);
+
+	if (!janela)return;
+
+	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
+	{
+		std::cout << "Failed to initialize GLAD" << std::endl;
+		return;
+	}
+	
+	defInputs(inputs.get());
+	contextoUI->glfwWindow = janela; contextoUI->inputs = inputs;
+
+	BubbleUI::Painel painelPrincipal(contextoUI, {0, 0, 400, 600}, "Calculadora");
+	painelPrincipal.selecionado = true;
+	painelPrincipal.adicionarWidget(std::make_shared<BubbleUI::Widgets::CaixaTexto>(nullptr, "expressao", true));
+
+	while (!glfwWindowShouldClose(janela))
+	{
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		glfwPollEvents();
+		
+		glfwGetFramebufferSize(janela, &contextoUI->tamanho.width, &contextoUI->tamanho.height);
+		glViewport(0, 0, contextoUI->tamanho.width, contextoUI->tamanho.height);
+
+		painelPrincipal.definirTamanho({ contextoUI->tamanho.width, contextoUI->tamanho.height });
+		painelPrincipal.atualizar();
+		painelPrincipal.renderizar();
+
+		glfwSwapBuffers(janela);
+	}
+}
+void main()
+{
+	iniciar();
+}
