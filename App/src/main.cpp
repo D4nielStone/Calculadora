@@ -1,5 +1,6 @@
 #include "src/ui/painel/painel.hpp"
 #include "src/ui/widgets/caixa_de_texto.hpp"
+#include <src/ui/widgets/botao.hpp>
 
 GLFWwindow *janela;
 std::shared_ptr<BubbleUI::Contexto> contextoUI;
@@ -38,6 +39,8 @@ static void iniciar()
 	BubbleUI::Painel painelPrincipal(contextoUI, {0, 0, 400, 600}, "Calculadora");
 	painelPrincipal.selecionado = true;
 	painelPrincipal.adicionarWidget(std::make_shared<BubbleUI::Widgets::CaixaTexto>(nullptr, "expressao", true));
+	painelPrincipal.adicionarWidget(std::make_shared<BubbleUI::Widgets::Botao>("1", nullptr, true, false));
+	painelPrincipal.adicionarWidget(std::make_shared<BubbleUI::Widgets::Botao>("2", nullptr, true, false));
 
 	while (!glfwWindowShouldClose(janela))
 	{

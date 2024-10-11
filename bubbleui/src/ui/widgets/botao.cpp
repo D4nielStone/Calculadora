@@ -24,6 +24,17 @@ Botao(const std::string &label_shared, std::function<void()> function, const std
     letra_padding = {5, 5};
 }
 
+BubbleUI::Widgets::Botao::Botao(const std::string& label_shared, bool* callback, bool completo, bool quebrar_linha)
+    : completo(completo), Callback(callback)
+{
+    quebrarLinha = quebrar_linha;
+    cor = { 1, 1, 1 };
+    frase = label_shared;
+    resolucao = 12;
+    configurar();
+    letra_padding = { 5, 5 };
+}
+
 void BubbleUI::Widgets::Botao::atualizar()
 {
     if (icon)
@@ -47,12 +58,16 @@ void BubbleUI::Widgets::Botao::atualizar()
     moldura.ocultar_linhas = true;
     if (inputs->mouseEnter == GLFW_RELEASE)gatilho = true;
     //calcula click
+    if(Callback)
+    *Callback = false;
     if (colisao.mouseEmCima() && inputs->mouseEnter == GLFW_PRESS && gatilho)
     {
         moldura.ocultar_linhas = false;
         if (funcao_click_)
         {
             funcao_click_();
+            if(Callback)
+            *Callback = true;
             gatilho = false;
         }
     }
