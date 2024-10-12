@@ -18,6 +18,9 @@
     <ClCompile Include="src\main.cpp">
       <Filter>Arquivos de Origem</Filter>
     </ClCompile>
+    <ClCompile Include="src\painel_calc.cpp">
+      <Filter>Arquivos de Origem</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="assets\shaders\imagem.frag" />
@@ -35,5 +38,12 @@
     <Font Include="assets\fontes\consolas\consolai.ttf" />
     <Font Include="assets\fontes\consolas\Consolas.ttf" />
     <Font Include="assets\fontes\consolas\consolaz.ttf" />
+    <Font Include="assets\fontes\courier-new\Courier New.ttf" />
+    <Font Include="assets\fontes\courier-new\Courier New Bold Italic font.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\painel_calc.hpp">
+      <Filter>Arquivos de Cabeçalho</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -49,6 +49,12 @@ void BubbleUI::Formas::Moldura::atualizar()
 	linha_c->atualizar();
 	linha_d->atualizar();
 	linha_e->atualizar();
+
+	linha_d->defCor(cor_base - 0.1f);
+	linha_b->defCor(cor_base - 0.1f);
+	linha_e->defCor(cor_base - 0.1f);
+	linha_c->defCor(cor_base - 0.1f);
+
 	posAtualizacao();
 }
 

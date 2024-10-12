@@ -1,10 +1,30 @@
 #include "caixa_de_texto.hpp"
 #include "src/ui/painel/painel.hpp"
+#include <exprtk.hpp>
+#include <iostream>
+#include <sstream>
+#include <iomanip>
+
+std::string to_short_string(double value)
+{
+    std::ostringstream oss;
+    oss << std::fixed << std::setprecision(6) << value;  // Define 6 casas decimais no máximo
+
+    std::string result = oss.str();
+
+    // Remover zeros desnecessários após a vírgula
+    result.erase(result.find_last_not_of('0') + 1, std::string::npos);
+    if (result.back() == '.') {
+        result.pop_back();  // Remove o ponto final se ele for o último caractere
+    }
+
+    return result;
+}
 
 BubbleUI::Widgets::CaixaTexto::CaixaTexto(const std::string &mensagem)
     : gatilho1(false), gatilho2(false), mensagem(mensagem)
 {
-    letra_padding = { 3, 3 };
+    letra_padding = { 5, 5 };
     resolucao = 12;
     lines_box_limite = 3;
     configurar();
@@ -17,7 +37,7 @@ BubbleUI::Widgets::CaixaTexto::CaixaTexto(std::shared_ptr<std::string> buffer, c
     if (buffer) {
         texto = buffer->c_str(); texto_cursor_index = buffer->size() - 1;
     }
-    letra_padding = { 2, 2 };
+    letra_padding = { 5, 5 };
     resolucao = 12;
     lines_box_limite = 3;
     configurar();
@@ -30,7 +50,7 @@ BubbleUI::Widgets::CaixaTexto::CaixaTexto(std::string* buffer, const std::string
     if (buffer) {
         texto = buffer->c_str(); texto_cursor_index = buffer->size() - 1;
     }
-    letra_padding = { 2, 2 };
+    letra_padding = { 5, 5 };
     resolucao = 12;
     lines_box_limite = 3;
     configurar();
@@ -108,23 +128,47 @@ void BubbleUI::Widgets::CaixaTexto::defPainel(Painel* painel)
     inputs = painel->obterContexto()->inputs; // Simplifica o acesso
 }
 
+static std::string resolverExpressao(const std::string& expression_string) {
+    typedef exprtk::symbol_table<double> symbol_table_t;
+    typedef exprtk::expression<double>   expression_t;
+    typedef exprtk::parser<double>       parser_t;
+
+    symbol_table_t symbol_table;
+    expression_t expression;
+    expression.register_symbol_table(symbol_table);
+
+    parser_t parser;
+    if (!parser.compile(expression_string, expression)) {
+        std::cerr << "Erro ao compilar a expressão: " << expression_string << std::endl;
+        return "ERRO";
+    }
+
+    double result = expression.value();
+    std::cout << "Resultado: " << result << std::endl;
+
+    return to_short_string(result);
+}
+
 void BubbleUI::Widgets::CaixaTexto::processarEntrada(char c)
 {
+    texto_cursor_index = texto.size();
     if (c == '\b' && texto_cursor_index > 0) // Backspace
     {
         texto.erase(texto_cursor_index - 1, 1); // Remove o caractere antes do cursor
-        texto_cursor_index--; // Atualiza a posição do cursor
         return;
     }
     else if (!apenasNumeros && c != '\b') // Entrada de texto normal
     {
         texto.insert(texto_cursor_index, 1, c); // Insere o caractere na posição do cursor
-        texto_cursor_index++; // Move o cursor
     }
-    else if (apenasNumeros && std::isdigit(c)) // Entrada apenas de números
+    else if (apenasNumeros && (std::isdigit(c) || c == '-'|| c == '+'|| c == '*'|| c == '/'|| c == '('|| c == ')'|| c == '.')) // Entrada apenas de números
     {
         texto.insert(texto_cursor_index, 1, c); // Insere apenas números
-        texto_cursor_index++; // Move o cursor
+    }
+    else if (apenasNumeros && inputs->isKeyPressed(ENTER))
+    {
+        if(resolverExpressao(texto) != "ERRO")
+            texto = resolverExpressao(texto);
     }
 }
 

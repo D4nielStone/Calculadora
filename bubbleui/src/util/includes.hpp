@@ -219,6 +219,11 @@ struct Size
 struct Color 
 {
     float r = 0.7f, g = 0.7f, b = 0.7f, a = 1.f;
+
+    Color operator-(const float& other) const
+    {
+        return { r - other, g - other, b - other , 1.f};
+    }
 };
 
 struct Vertex {

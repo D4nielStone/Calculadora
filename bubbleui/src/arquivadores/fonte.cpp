@@ -30,7 +30,7 @@ void Bubble::Arquivadores::carregarFonte(std::string path)
         }
 
         // Carrega Fonte
-        if (FT_New_Face(library, path.c_str(), 0, &face) == FT_Err_Unknown_File_Format)
+        if (FT_New_Face(library, "assets/fontes/consolas/consolas.ttf", 0, &face) == FT_Err_Unknown_File_Format)
         {
             return;
         }
@@ -82,7 +82,8 @@ void Bubble::Arquivadores::definirResolucao(int resolution)
     glPixelStorei(GL_UNPACK_ALIGNMENT, 1); // Desabilitar restrição de alinhamento de byte
 
     // Iterar sobre um intervalo de caracteres Unicode (Exemplo: ASCII estendido de 0x20 a 0x7E)
-    for (unsigned long charcode = 0x20; charcode <= 0x7E; ++charcode) {
+    for (unsigned long charcode = 0x20; charcode <= 0x7E; ++charcode) 
+    {
         // Verificar se o glifo existe na fonte
         FT_UInt glyph_index = FT_Get_Char_Index(face, charcode);
         if (glyph_index == 0) {
@@ -111,7 +112,7 @@ void Bubble::Arquivadores::definirResolucao(int resolution)
             face->glyph->bitmap.buffer
         );
 
-        // Definir opções de textura
+        // Defi1nir opções de textura
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
@@ -126,4 +127,45 @@ void Bubble::Arquivadores::definirResolucao(int resolution)
         };
         Characters.insert(std::make_pair(charcode, character));
     }
+
+    //carrega caractere específico 0xAC ¬
+
+    // Verificar se o glifo existe na fonte
+    FT_UInt glyph_index = FT_Get_Char_Index(face, 0xAC);
+
+    // Carregar o glifo do caractere
+    if (FT_Load_Char(face, 0xAC, FT_LOAD_RENDER)) {
+        return;
+    }
+
+    // Gerar a textura
+    unsigned int texture;
+    glGenTextures(1, &texture);
+    glBindTexture(GL_TEXTURE_2D, texture);
+    glTexImage2D(
+        GL_TEXTURE_2D,
+        0,
+        GL_RED,
+        face->glyph->bitmap.width,
+        face->glyph->bitmap.rows,
+        0,
+        GL_RED,
+        GL_UNSIGNED_BYTE,
+        face->glyph->bitmap.buffer
+    );
+
+    // Definir opções de textura
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+    // Armazenar o caractere para uso futuro
+    Character character = {
+        texture,
+        glm::ivec2(face->glyph->bitmap.width, face->glyph->bitmap.rows),
+        glm::ivec2(face->glyph->bitmap_left, face->glyph->bitmap_top),
+        face->glyph->advance.x
+    };
+    Characters.insert(std::make_pair('¬', character));
 }

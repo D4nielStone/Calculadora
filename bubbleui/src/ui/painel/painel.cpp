@@ -62,9 +62,25 @@ namespace BubbleUI {
         arvoreCor = {0.1f, 0.1f, 0.1f};
         if (selecionado)
         {
-            bordaCima->atualizar(); bordaBaixo->atualizar();
-            bordaEsq->atualizar(); bordaDir->atualizar();
-            corrigirLimite();
+
+            // Atualizar as bordas
+            bordaCima->atualizar();
+            bordaBaixo->atualizar();
+            bordaEsq->atualizar();
+            bordaDir->atualizar();
+
+            // Se não estiver preenchido, corrige o limite, senão ajusta a janela
+                corrigirLimite();
+            if (preenchido)
+            {
+                // Ajusta o tamanho da janela
+                glfwSetWindowSize(contexto->glfwWindow, retangulo.w + 10, retangulo.h + 10);
+
+                // Após o ajuste de tamanho, redefine a posição
+                glfwSetWindowPos(contexto->glfwWindow, retangulo.x, retangulo.y);
+            }
+
+            // Define a cor para a aba selecionada
             aba->obterCorpo()->defCor({ 0.4f, 0.0f, 0.4f, 1 });
         }
         else
@@ -98,7 +114,6 @@ namespace BubbleUI {
 
         moldura.renderizar();
         preRenderizacao();
-        aba->renderizar();
 
         // Renderiza os widgets
         for (const auto& widget : lista_widgets)
@@ -108,6 +123,7 @@ namespace BubbleUI {
 
         menuDeContexto->renderizar();
         posRenderizacao();
+        aba->renderizar();
     }
 
     // Configuração do Painel

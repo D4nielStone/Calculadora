@@ -31,7 +31,7 @@ namespace BubbleUI
 		virtual void defPainel(Painel* painel);
 		void defAlinhamento(const Alinhamento& lado);
 		std::shared_ptr<Widgets::Arvore> arvore_pai{ nullptr };
-		bool quebrarLinha{ false };
+		bool quebrarLinha{ true };
 	protected:
 		Colisao2d colisao;
 		Formas::Moldura moldura;

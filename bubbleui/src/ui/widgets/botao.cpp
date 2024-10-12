@@ -24,9 +24,10 @@ Botao(const std::string &label_shared, std::function<void()> function, const std
     letra_padding = {5, 5};
 }
 
-BubbleUI::Widgets::Botao::Botao(const std::string& label_shared, bool* callback, bool completo, bool quebrar_linha)
+BubbleUI::Widgets::Botao::Botao(const std::string& label_shared, bool* callback, bool completo, bool quebrar_linha, float d_h)
     : completo(completo), Callback(callback)
 {
+    DivisaoHorizontal = d_h;
     quebrarLinha = quebrar_linha;
     cor = { 1, 1, 1 };
     frase = label_shared;
@@ -45,8 +46,8 @@ void BubbleUI::Widgets::Botao::atualizar()
     // largura se completo ou não
     if (completo)
     {
-        moldura.defTam({ painel->obterRetangulo().w - painel->widgetPadding.x * 2, static_cast<int>(box_size.y) });
-        colisao.defRect({ box_pos.x, box_pos.y, painel->obterRetangulo().w - painel->widgetPadding.x * 2, (int)box_size.y});
+        moldura.defTam({ static_cast<int>((painel->obterRetangulo().w / DivisaoHorizontal) - painel->widgetPadding.x * 2), static_cast<int>(box_size.y) });
+        colisao.defRect({ box_pos.x, box_pos.y, static_cast<int>((painel->obterRetangulo().w/DivisaoHorizontal) - painel->widgetPadding.x * 2), (int)box_size.y});
     }
     else
     {

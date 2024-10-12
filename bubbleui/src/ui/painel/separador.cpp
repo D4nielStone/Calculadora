@@ -110,11 +110,13 @@ void BubbleUI::Separador::atualizarArrasto()
 			break;
 		case ESQUERDA:
 			contexto->cursor = contexto->cursor_horizontal;
+			if(!painel->preenchido)
 				painel->adicionarPosicao({ static_cast<int>(inputs->mousex - mouse_pos_ini.x), 0 });
 				painel->adicionarTamanho({ -static_cast<int>(inputs->mousex - mouse_pos_ini.x), 0 });
 			break;
 		case CIMA:
-			contexto->cursor = contexto->cursor_vertical;
+				contexto->cursor = contexto->cursor_vertical;
+			if (!painel->preenchido)
 				painel->adicionarPosicao({ 0,static_cast<int>(inputs->mousey - mouse_pos_ini.y) });
 				painel->adicionarTamanho({ 0,-static_cast<int>(inputs->mousey - mouse_pos_ini.y) });
 			break;

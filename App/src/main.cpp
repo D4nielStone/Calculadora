@@ -1,6 +1,5 @@
-#include "src/ui/painel/painel.hpp"
-#include "src/ui/widgets/caixa_de_texto.hpp"
-#include <src/ui/widgets/botao.hpp>
+#include "painel_calc.hpp"
+#include <windows.h>
 
 GLFWwindow *janela;
 std::shared_ptr<BubbleUI::Contexto> contextoUI;
@@ -21,6 +20,9 @@ static void iniciar()
 	if (!glfwInit())
 		return;
 	
+	glfwWindowHint(GLFW_DECORATED, GLFW_FALSE);
+	glfwWindowHint(GLFW_TRANSPARENT_FRAMEBUFFER, GLFW_TRUE);
+
 	janela = glfwCreateWindow(400, 600, "Calculadora", NULL, NULL);
 
 	glfwMakeContextCurrent(janela);
@@ -36,12 +38,8 @@ static void iniciar()
 	defInputs(inputs.get());
 	contextoUI->glfwWindow = janela; contextoUI->inputs = inputs;
 
-	BubbleUI::Painel painelPrincipal(contextoUI, {0, 0, 400, 600}, "Calculadora");
-	painelPrincipal.selecionado = true;
-	painelPrincipal.adicionarWidget(std::make_shared<BubbleUI::Widgets::CaixaTexto>(nullptr, "expressao", true));
-	painelPrincipal.adicionarWidget(std::make_shared<BubbleUI::Widgets::Botao>("1", nullptr, true, false));
-	painelPrincipal.adicionarWidget(std::make_shared<BubbleUI::Widgets::Botao>("2", nullptr, true, false));
-
+	BubbleUI::Calculadora painelPrincipal(contextoUI);
+	
 	while (!glfwWindowShouldClose(janela))
 	{
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -50,14 +48,23 @@ static void iniciar()
 		glfwGetFramebufferSize(janela, &contextoUI->tamanho.width, &contextoUI->tamanho.height);
 		glViewport(0, 0, contextoUI->tamanho.width, contextoUI->tamanho.height);
 
-		painelPrincipal.definirTamanho({ contextoUI->tamanho.width, contextoUI->tamanho.height });
 		painelPrincipal.atualizar();
 		painelPrincipal.renderizar();
+
+		glfwSetCursor(janela, contextoUI->cursor);
 
 		glfwSwapBuffers(janela);
 	}
 }
-void main()
+
+#ifdef _DEBUG
+#define INIT main()
+#else
+#define INIT APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,PSTR lpCmdLine, int nCmdShow)
+#endif
+
+int INIT
 {
 	iniciar();
+return 0;
 }

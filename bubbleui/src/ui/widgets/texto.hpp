@@ -15,7 +15,7 @@ namespace BubbleUI
 			Texto() = default;
 			void atualizar() override;
 			void renderizar() const override;
-			static void configurar(unsigned int resolucao = 12, std::string font_path = "assets/fontes/consolas/consolas.ttf");
+			static void configurar(unsigned int resolucao = 12, std::string font_path = "assets/fontes/consolas/consolas.tff");
 		protected:
 			bool desenharSelecao(Vector2 mouse_inicial, Vector2 mouse_final, Vector4 char_rect, size_t letra_idx);
 			void renderizar_texto(std::string &frase);
@@ -23,6 +23,7 @@ namespace BubbleUI
 			bool selecionando_texto{ false };
 			unsigned int resolucao, texturaID;
 			int lines_box_limite, largura_texto;
+			float DivisaoHorizontal{ 1.f };
 			Vector2f box_size, box_pos, line_pos;
 			Vector2 letra_padding;
 			std::string frase;
