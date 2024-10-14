@@ -57,10 +57,10 @@ static void iniciar()
 	}
 }
 
-#ifdef _DEBUG
-#define INIT main()
-#else
+#ifdef NDEBUG
 #define INIT APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,PSTR lpCmdLine, int nCmdShow)
+#else
+#define INIT main()
 #endif
 
 int INIT

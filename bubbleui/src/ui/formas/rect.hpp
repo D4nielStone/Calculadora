@@ -1,5 +1,5 @@
 #pragma once
-#include "glad/glad.h"
+#include <glad/glad.h>
 #include "bubbleui.hpp"
 #include "src/util/includes.hpp"
 #include "src/ui/contexto/contexto.hpp"

@@ -58,7 +58,7 @@ BubbleUI::Widgets::Arvore::Arvore(std::shared_ptr<std::string>l, bool* retorno) 
 void BubbleUI::Widgets::Arvore::atualizar()
 {
     // Salva o padding antigo do pai
-    float padding_antigoy = painel->widgetPadding.y;
+    int padding_antigoy = painel->widgetPadding.y;
 
     // Ajusta temporariamente o padding vertical do pai para 0
     painel->widgetPadding.y = 0;

@@ -3,7 +3,6 @@
 #include "unordered_map"
 #include "bubbleui.hpp"
 #include <freeimage.h>
-#include <assimp/scene.h>
 #include <glad/glad.h>
 
 class GLFWimage;
@@ -38,7 +37,6 @@ namespace Bubble {
         public:
             static TextureLoader& getInstance();
             GLuint carregarTextura(const std::string& caminho, int* width = nullptr, int* height = nullptr);
-            GLuint carregarAiTexture(const aiTexture* texture);
         private:
             std::unordered_map<std::string, GLuint> texturasCarregadas;
 

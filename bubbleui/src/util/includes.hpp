@@ -5,7 +5,6 @@
 #include <cstdio>
 #include <iostream>
 #include <bubbleui.hpp>
-#include "glm/glm.hpp"
 #include "src/arquivadores/shader.hpp"
 #include <any>
 

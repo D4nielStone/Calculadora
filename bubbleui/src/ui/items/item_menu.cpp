@@ -34,7 +34,7 @@ void BubbleUI::Items::ItemMenu::atualizar()
         // Verifica se o botão esquerdo do mouse foi pressionado
         if (inputs->mouseEnter == GLFW_PRESS && inputs->mouseButton == GLFW_MOUSE_BUTTON_LEFT)  clicado = true; // Marca que o item foi clicado
         mouseEmCima = true; // Marca que o mouse está mais sobre o item
-        moldura.defCor({ 0.4, 0.4, 0.4 }); // Define uma cor diferente para a moldura
+        moldura.defCor({ 0.4f, 0.4f, 0.4f }); // Define uma cor diferente para a moldura
     }
     // Verifica gatilho para toque
     if (inputs->mouseEnter == GLFW_RELEASE)

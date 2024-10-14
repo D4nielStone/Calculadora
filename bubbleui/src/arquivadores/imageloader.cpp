@@ -226,7 +226,7 @@ GLuint Bubble::Arquivadores::TextureLoader::carregarTextura(const std::string& c
     return id;
 }
 
-GLuint Bubble::Arquivadores::TextureLoader::carregarAiTexture(const aiTexture* texture)
+/*GLuint Bubble::Arquivadores::TextureLoader::carregarAiTexture(const aiTexture* texture)
 {
     GLuint ID{};
     if (texture) {
@@ -255,3 +255,4 @@ GLuint Bubble::Arquivadores::TextureLoader::carregarAiTexture(const aiTexture* t
     }
     return ID;
 }
+*/

@@ -2,8 +2,6 @@
 #include "glad/glad.h"
 #include <map>
 #include <string>
-#include <glm/glm.hpp>
-
 using namespace Bubble::Arquivadores;
 
 FT_Face face;
@@ -121,8 +119,8 @@ void Bubble::Arquivadores::definirResolucao(int resolution)
         // Armazenar o caractere para uso futuro
         Character character = {
             texture,
-            glm::ivec2(face->glyph->bitmap.width, face->glyph->bitmap.rows),
-            glm::ivec2(face->glyph->bitmap_left, face->glyph->bitmap_top),
+            Vector2(face->glyph->bitmap.width, face->glyph->bitmap.rows),
+            Vector2(face->glyph->bitmap_left, face->glyph->bitmap_top),
             face->glyph->advance.x
         };
         Characters.insert(std::make_pair(charcode, character));
@@ -163,8 +161,8 @@ void Bubble::Arquivadores::definirResolucao(int resolution)
     // Armazenar o caractere para uso futuro
     Character character = {
         texture,
-        glm::ivec2(face->glyph->bitmap.width, face->glyph->bitmap.rows),
-        glm::ivec2(face->glyph->bitmap_left, face->glyph->bitmap_top),
+        Vector2(face->glyph->bitmap.width, face->glyph->bitmap.rows),
+        Vector2(face->glyph->bitmap_left, face->glyph->bitmap_top),
         face->glyph->advance.x
     };
     Characters.insert(std::make_pair('¬', character));

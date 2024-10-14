@@ -1,6 +1,5 @@
 #pragma once
 #include "bubbleui.hpp"
-#include "glm/glm.hpp"
 #include "string"
 #include <map>
 #include <ft2build.h>
@@ -14,8 +13,8 @@ namespace Bubble
 		struct BEUI_DLL_API Character
 		{
 			unsigned int TextureID;  // ID handle of the glyph texture
-			glm::ivec2   Size;       // Size of glyph
-			glm::ivec2   Bearing;    // Offset from baseline to left/top of glyph
+			Vector2 Size;       // Size of glyph
+			Vector2 Bearing;    // Offset from baseline to left/top of glyph
 			FT_Pos Advance;    // Offset to advance to next glyph
 		};
 		BEUI_DLL_API std::map<char32_t, Character>* obterCaracteres();
