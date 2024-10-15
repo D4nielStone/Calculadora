@@ -1,6 +1,6 @@
 #pragma once
 #include "src/ui/painel/painel.hpp"
-namespace BubbleUI
+namespace Interface
 {
 	class Calculadora : public Painel
 	{
