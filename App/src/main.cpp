@@ -2,7 +2,7 @@
 #include <windows.h>
 
 GLFWwindow *janela;
-std::shared_ptr<BubbleUI::Contexto> contextoUI;
+std::shared_ptr<Interface::Contexto> contextoUI;
 
 static void defInputs(Bubble::Inputs::Inputs* inp)
 {
@@ -15,7 +15,7 @@ static void defInputs(Bubble::Inputs::Inputs* inp)
 static void iniciar()
 {
 	auto inputs = std::make_shared<Bubble::Inputs::Inputs>();
-	contextoUI = std::make_shared<BubbleUI::Contexto>();
+	contextoUI = std::make_shared<Interface::Contexto>();
 
 	if (!glfwInit())
 		return;
@@ -38,7 +38,7 @@ static void iniciar()
 	defInputs(inputs.get());
 	contextoUI->glfwWindow = janela; contextoUI->inputs = inputs;
 
-	BubbleUI::Calculadora painelPrincipal(contextoUI);
+	Interface::Calculadora painelPrincipal(contextoUI);
 	
 	while (!glfwWindowShouldClose(janela))
 	{

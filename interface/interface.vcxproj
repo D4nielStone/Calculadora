@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -21,10 +21,10 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{f5adaa33-ecf2-49d3-b409-2ac778d6740b}</ProjectGuid>
-    <RootNamespace>App</RootNamespace>
+    <ProjectGuid>{91dd1161-9ed2-420a-b1d9-9b2a7216d14f}</ProjectGuid>
+    <RootNamespace>bubbleui</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
-    <ProjectName>Calculadora</ProjectName>
+    <ProjectName>Interface</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -41,13 +41,13 @@
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -106,16 +106,19 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BEUI_EXPORTS;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)interface</AdditionalIncludeDirectories>
-      <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalIncludeDirectories>$(SolutionDir)becommons;$(ProjectDir)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>Interface.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(OutDir)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <PerUserRedirection>true</PerUserRedirection>
+      <AdditionalLibraryDirectories>
+      </AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -124,49 +127,85 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;_CONSOLE;WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BEUI_EXPORTS;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)interface</AdditionalIncludeDirectories>
-      <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalIncludeDirectories>$(SolutionDir)becommons;$(ProjectDir)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
-      <SubSystem>Windows</SubSystem>
+      <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>Interface.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(OutDir)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>
+      </AdditionalLibraryDirectories>
+      <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\painel_calc.cpp" />
-    <ClCompile Include="src\main.cpp" />
+    <ClInclude Include="interface.hpp" />
+    <ClInclude Include="src\arquivadores\fonte.hpp" />
+    <ClInclude Include="src\arquivadores\imageloader.hpp" />
+    <ClInclude Include="src\arquivadores\shader.hpp" />
+    <ClInclude Include="src\inputs\inputs.hpp" />
+    <ClInclude Include="src\ui\items\item_texto.hpp" />
+    <ClInclude Include="src\ui\painel\jogo.hpp" />
+    <ClInclude Include="src\ui\painel\inspetor.hpp" />
+    <ClInclude Include="src\ui\widgets\arvore.hpp" />
+    <ClInclude Include="src\ui\items\item_arvore.hpp" />
+    <ClInclude Include="src\ui\items\item_botao.hpp" />
+    <ClInclude Include="src\ui\items\item_menu.hpp" />
+    <ClInclude Include="src\ui\widgets\botao.hpp" />
+    <ClInclude Include="src\ui\util\pop_up.hpp" />
+    <ClInclude Include="src\ui\formas\moldura.hpp" />
+    <ClInclude Include="src\ui\widgets\caixa_de_texto.hpp" />
+    <ClInclude Include="src\ui\painel\entidades.hpp" />
+    <ClInclude Include="src\ui\painel\aba.hpp" />
+    <ClInclude Include="src\ui\painel\editor.hpp" />
+    <ClInclude Include="src\ui\widgets\checkbox.hpp" />
+    <ClInclude Include="src\ui\widgets\imagem.hpp" />
+    <ClInclude Include="src\ui\painel\depurador.hpp" />
+    <ClInclude Include="src\ui\formas\colisao2d.hpp" />
+    <ClInclude Include="src\ui\painel\separador.hpp" />
+    <ClInclude Include="src\ui\formas\linha.hpp" />
+    <ClInclude Include="src\ui\painel\painel.hpp" />
+    <ClInclude Include="src\ui\contexto\contexto.hpp" />
+    <ClInclude Include="src\ui\formas\rect.hpp" />
+    <ClInclude Include="src\ui\widgets\seletor_de_cor.hpp" />
+    <ClInclude Include="src\ui\widgets\widget.hpp" />
+    <ClInclude Include="src\ui\widgets\texto.hpp" />
+    <ClInclude Include="src\util\includes.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="assets\shaders\imagem.frag" />
-    <None Include="assets\shaders\imagem.vert" />
-    <None Include="assets\shaders\linha.frag" />
-    <None Include="assets\shaders\linha.vert" />
-    <None Include="assets\shaders\quad.frag" />
-    <None Include="assets\shaders\quad.vert" />
-    <None Include="assets\shaders\texto.frag" />
-    <None Include="assets\shaders\texto.vert" />
-  </ItemGroup>
-  <ItemGroup>
-    <Font Include="assets\fontes\consolas\Consola.ttf" />
-    <Font Include="assets\fontes\consolas\CONSOLAB.TTF" />
-    <Font Include="assets\fontes\consolas\consolai.ttf" />
-    <Font Include="assets\fontes\consolas\Consolas.ttf" />
-    <Font Include="assets\fontes\consolas\consolaz.ttf" />
-    <Font Include="assets\fontes\courier-new\Courier New Bold Italic font.ttf" />
-    <Font Include="assets\fontes\courier-new\Courier New.ttf" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="src\painel_calc.hpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="ICON.ico" />
+    <ClCompile Include="src\arquivadores\fonte.cpp" />
+    <ClCompile Include="src\arquivadores\imageloader.cpp" />
+    <ClCompile Include="src\arquivadores\shader.cpp" />
+    <ClCompile Include="src\inputs\inputs.cpp" />
+    <ClCompile Include="src\ui\items\item_texto.cpp" />
+    <ClCompile Include="src\ui\widgets\arvore.cpp" />
+    <ClCompile Include="src\ui\items\item_arvore.cpp" />
+    <ClCompile Include="src\ui\items\item_botao.cpp" />
+    <ClCompile Include="src\ui\items\item_menu.cpp" />
+    <ClCompile Include="src\ui\widgets\botao.cpp" />
+    <ClCompile Include="src\ui\util\pop_up.cpp" />
+    <ClCompile Include="src\ui\formas\moldura.cpp" />
+    <ClCompile Include="src\ui\widgets\caixa_de_texto.cpp" />
+    <ClCompile Include="src\ui\painel\aba.cpp" />
+    <ClCompile Include="src\ui\widgets\checkbox.cpp" />
+    <ClCompile Include="src\ui\widgets\imagem.cpp" />
+    <ClCompile Include="src\ui\formas\colisao2d.cpp" />
+    <ClCompile Include="src\ui\painel\separador.cpp" />
+    <ClCompile Include="src\ui\formas\linha.cpp" />
+    <ClCompile Include="src\ui\painel\painel.cpp" />
+    <ClCompile Include="src\ui\contexto\contexto.cpp" />
+    <ClCompile Include="src\ui\formas\rect.cpp" />
+    <ClCompile Include="src\ui\widgets\seletor_de_cor.cpp" />
+    <ClCompile Include="src\ui\widgets\widget.cpp" />
+    <ClCompile Include="src\ui\widgets\texto.cpp" />
+    <ClCompile Include="src\util\includes.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
