@@ -1,17 +1,6 @@
 #include "rect.hpp"
 
 using namespace Interface::Formas;
-// Dentro da classe Rect, adicione um buffer para instâncias
-uint instanceVBO;
-
-// Vamos criar uma estrutura para armazenar as transformações de cada instância
-struct Instancia {
-    Vector2 posicao;
-    Vector2 tamanho;
-    Color cor;
-};
-
-std::vector<Instancia> instancias; // Armazena todas as instâncias
 
 Rect::Rect(std::shared_ptr<Contexto> ctx, const Vector4<int> &rect) : retangulo(rect), contexto(ctx)
 {
@@ -29,25 +18,25 @@ Vector4<float> Rect::obtRectNDC() const
     return coord_ndc;
 }
 
-void Rect::defTam(const Vector2 &tam)
+void Rect::defTam(const Vector2<int> &tam)
 {
     retangulo.w = tam.x;
     retangulo.h = tam.y;
 }
 
-void Rect::defPos(const Vector2 &pos)
+void Rect::defPos(const Vector2<int> &pos)
 {
-    retangulo.x = static_cast<float>(pos.x);
-    retangulo.y = static_cast<float>(pos.y);
+    retangulo.x = pos.x;
+    retangulo.y = pos.y;
 }
 
-void Rect::adiTam(const Vector2 &tam)
+void Rect::adiTam(const Vector2<int>&tam)
 {
     retangulo.w += tam.x;
     retangulo.h += tam.y;
 }
 
-void Rect::adiPos(const Vector2 &pos)
+void Rect::adiPos(const Vector2<int>&pos)
 {
     retangulo.x += pos.x;
     retangulo.y += pos.y;

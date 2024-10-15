@@ -3,11 +3,11 @@
 #include "src/arquivadores/imageloader.hpp"
 
 using namespace Interface::Widgets;
-Imagem::Imagem(uint id, const Vector2 &size, const bool &auto_resize) : ID(id), rect({ 0, 0, size.x, size.y }), preencher(auto_resize)
+Imagem::Imagem(uint id, const Vector2<int> &size, const bool &auto_resize) : ID(id), rect({ 0, 0, size.x, size.y }), preencher(auto_resize)
 {
 }
 
-Imagem::Imagem(const std::string& path, int size_percentage, Vector2 *posicao) : posicao_ptr(posicao)
+Imagem::Imagem(const std::string& path, int size_percentage, Vector2<int> *posicao) : posicao_ptr(posicao)
 {
     auto &gerenciador = Bubble::Arquivadores::TextureLoader::getInstance();
     ID = gerenciador.carregarTextura(path, &rect.w, &rect.h);
@@ -15,7 +15,7 @@ Imagem::Imagem(const std::string& path, int size_percentage, Vector2 *posicao) :
     rect.h *= static_cast<int>(static_cast<float>(size_percentage) / 100);
 }
 
-Imagem::Imagem(const std::string& path, const Vector2& size)
+Imagem::Imagem(const std::string& path, const Vector2<int>& size)
 {
     auto& gerenciador = Bubble::Arquivadores::TextureLoader::getInstance();
     ID = gerenciador.carregarTextura(path, &rect.w, &rect.h);

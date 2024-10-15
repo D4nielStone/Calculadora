@@ -45,8 +45,8 @@ void Interface::Items::Texto::renderizar() const
 void Interface::Items::Texto::renderizar_texto()
 {
     // Posiciona o box dentro do widget, com padding do pai
-    box_pos.x =  pai->obtRect().x + pai->widgetPadding.x + pai->posicaoWidget.x;
-    box_pos.y =  pai->obtRect().y + pai->widgetPadding.y + pai->posicaoWidget.y;
+    box_pos.x =  static_cast<int>(pai->obtRect().x + pai->widgetPadding.x + pai->posicaoWidget.x);
+    box_pos.y =  static_cast<int>(pai->obtRect().y + pai->widgetPadding.y + pai->posicaoWidget.y);
     box_size.x = pai->obtRect().w - pai->widgetPadding.x * 2;
     box_size.y = 0; // Inicialize como 0, vai ser atualizado com a altura do texto
 
@@ -79,8 +79,8 @@ void Interface::Items::Texto::renderizar_texto()
         }
 
         // Define o retângulo da letra
-        char_rect.x = box_pos.x + x_letter + line_pos.x;
-        char_rect.y = y_letter + line_pos.y;
+        char_rect.x = static_cast<int>(box_pos.x + x_letter + line_pos.x);
+        char_rect.y = static_cast<int>(y_letter + line_pos.y);
         char_rect.w = w_letter;
         char_rect.h = h_letter;
 

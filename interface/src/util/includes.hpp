@@ -129,71 +129,111 @@ struct Vector4
 
     Vector4() : x(0), y(0), w(0), h(0) {};
 };
-
+// Definição da estrutura Vector2<int>
+template <typename T>
 struct Vector2
 {
-    int x = 0, y = 0;
-    // Operador de soma (+)
+    T x, y;
+    Vector2(float x, float y) : x(x), y(y){}
+    Vector2(int x, int y) : x(x), y(y){}
+    Vector2(uint x, uint y) : x(x), y(y){}
+
+    // Deve somar
     Vector2 operator+(const Vector2& other) const
     {
-        return { x + other.x && y + other.y };
-    }
-    // Operador de subtacao (-)
+        return Vector2{ x + other.x, y + other.y};
+    };
+    Vector2 operator+(const float other) const
+    {
+        return Vector2{ x + other, y + other };
+    };
+    Vector2& operator+=(const Vector2& other)
+    {
+        x += other.x;
+        y += other.y;
+        return *this;
+    };
+    Vector2& operator+=(const float other)
+    {
+        x += other;
+        y += other;
+        return *this;
+    };
+    // Deve subtrair
     Vector2 operator-(const Vector2& other) const
     {
-        return { x - other.x && y - other.y };
-    }
+        return Vector2{ x - other.x, y - other.y };
+    };
+    Vector2 operator-(const float other) const
+    {
+        return Vector2{ x - other, y - other };
+    };
+    Vector2& operator-=(const Vector2& other)
+    {
+        x -= other.x;
+        y -= other.y;
+        return *this;
+    };
+    Vector2& operator-=(const float other)
+    {
+        x -= other;
+        y -= other;
+        return *this;
+    };
+    // Deve multiplicar
+    Vector2 operator*(const Vector2& other) const
+    {
+        return Vector2{ x * other.x, y * other.y };
+    };
+    Vector2 operator*(float other) const
+    {
+        return Vector2{ x * other, y * other };
+    };
+    Vector2& operator*=(const Vector2& other)
+    {
+        x *= other.x;
+        y *= other.y;
+        return *this;
+    };
+    Vector2& operator*=(float other)
+    {
+        x *= other;
+        y *= other;
+        return *this;
+    };
+    // Deve dividir
+    Vector2 operator/(const Vector2& other) const
+    {
+        return Vector2{ x / other.x, y / other.y };
+    };
+    Vector2 operator/(float other) const
+    {
+        return Vector2{ x / other, y / other };
+    };
+    Vector2& operator/=(const Vector2& other)
+    {
+        x /= other.x;
+        y /= other.y;
+        return *this;
+    };
+    Vector2& operator/=(float other)
+    {
+        x /= other;
+        y /= other;
+        return *this;
+    };
     // Operador de igualdade (==)
     bool operator==(const Vector2& other) const
     {
         return x == other.x && y == other.y;
     }
-
     // Operador de diferença (!=)
     bool operator!=(const Vector2& other) const
     {
         return !(*this == other);
     }
-};
-struct Vector3
-{
-    int x = 0, y = 0, z = 0;
-    // Operador de soma (+)
-    Vector3 operator+(const Vector3& other) const
-    {
-        return { x + other.x && y + other.y && z + other.z };
-    }
-    // Operador de igualdade (==)
-    bool operator==(const Vector3& other) const
-    {
-        return x == other.x && y == other.y && z == other.z;
-    }
 
-    // Operador de diferença (!=)
-    bool operator!=(const Vector3& other) const
-    {
-        return !(*this == other);
-    }
-};
-struct Vector2f
-{
-    float x = 0, y = 0;
-    // Operador de igualdade (==)
-    bool operator==(const Vector2f& other) const
-    {
-        return x == other.x && y == other.y;
-    }
-
-    // Operador de diferença (!=)
-    bool operator!=(const Vector2f& other) const
-    {
-        return !(*this == other);
-    }
-    // Operador de soma (+)
-    Vector2f operator+(const Vector2f& other) const
-    {
-        return {x + other.x, y+other.y};
-    }
+    Vector2() : x(0), y(0) {};
 };
 
 struct Color 

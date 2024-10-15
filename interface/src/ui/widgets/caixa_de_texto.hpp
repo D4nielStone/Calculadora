@@ -29,7 +29,7 @@ namespace Interface
             std::string mensagem, texto;
             std::shared_ptr<std::string> buffer_texto;
             bool gatilho1, gatilho2, selecionado{ false };
-            Vector2 mouse_pos_ini;
+            Vector2<int> mouse_pos_ini;
             double cronometro;
         };
     }

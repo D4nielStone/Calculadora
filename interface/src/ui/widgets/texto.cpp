@@ -134,7 +134,7 @@ void Texto::configurar(const uint resolucao, const std::string &font_path)
 }
 
 // Método para detextar caractéres selecionados
-bool Texto::desenharSelecao(Vector2 mouse_inicial, Vector2 mouse_final, Vector4<float> char_rect, size_t letra_idx)
+bool Texto::desenharSelecao(Vector2<bool> mouse_inicial, Vector2<bool> mouse_final, Vector4<float> char_rect, size_t letra_idx)
 {
     // Verifica se a letra está na área de seleção
     bool intersecta_verticalmente = char_rect.y + char_rect.h > mouse_inicial.y && char_rect.y < mouse_final.y; // Verifica interseção horizontal

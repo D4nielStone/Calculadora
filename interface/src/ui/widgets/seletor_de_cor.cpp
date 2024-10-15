@@ -25,7 +25,7 @@ SeletorDeCor::SeletorDeCor(Color* cor, const std::string& label, const Alinhamen
 : cor_callback(cor)
 {
     alinhamentoHorizontal = alinhamento;
-    arco_cor = std::make_unique<Imagem>("assets/texturas/icons/arco_cor.png", Vector2{static_cast<int>(raio*2), static_cast<int>(raio * 2) });
+    arco_cor = std::make_unique<Imagem>("assets/texturas/icons/arco_cor.png", Vector2<int>{static_cast<int>(raio*2), static_cast<int>(raio * 2) });
     arco_cor->defAlinhamento(Alinhamento::Direita); arco_cor->padding = true;
     arco_cor->quebrarLinha = true;
     arco_cor->flip = true;
@@ -56,10 +56,10 @@ void SeletorDeCor::defPainel(Painel* painel)
 
 void SeletorDeCor::calcularCor()
 {
-    float cx = arco_cor->obtRect().x + arco_cor->obtRect().w/2.f;
-    float cy = arco_cor->obtRect().y + arco_cor->obtRect().h /2.f;
-    float dx = inputs->mousex - cx;
-    float dy = inputs->mousey - cy;
+    double cx = static_cast<double>(arco_cor->obtRect().x + arco_cor->obtRect().w/2.0 );
+    double cy = static_cast<double>(arco_cor->obtRect().y + arco_cor->obtRect().h /2.0);
+    double dx = inputs->mousex - cx;
+    double dy = inputs->mousey - cy;
 
     angulo = atan2(dy, dx);  // Radians
     hue = angulo * (180.f / PI);

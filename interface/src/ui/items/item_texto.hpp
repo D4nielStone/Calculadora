@@ -24,11 +24,11 @@ namespace Interface
 			void quebrarLinha(bool boleano);
 			int largura{ 0 }, altura{ 0 };
 		protected:
-			Vector2f box_pos{ 0, 0 }, line_pos{ 0, 0 };
+			Vector2<int> box_pos{ 0, 0 }, line_pos{ 0, 0 };
 			void renderizar_texto();
 			uint resolucao, texturaID;
 			int lines_box_limite, largura_texto;
-			Vector2 box_size{ 0, 0 }, letra_padding{2, 2}, pos_texto{ 0, 0 };
+			Vector2<int> box_size{ 0, 0 }, letra_padding{2, 2}, pos_texto{ 0, 0 };
 			std::string texto{ "" }, frase{ "" };
 			std::string* label_shared{ nullptr };
 			Color cor{ 1, 1, 1 };

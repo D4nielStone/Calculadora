@@ -18,17 +18,17 @@ namespace Interface
 		Painel(std::shared_ptr<Contexto> ctx, const Vector4<int>& rect = {0, 0, 400, 600}, const std::string &nome = "Painel");
 
 		// Manipulação de Tamanho e Posição
-		void definirTamanho(const Vector2& tam);
-		void definirPosicao(const Vector2& pos);
-		void adicionarTamanho(const Vector2& tam);
-		void adicionarPosicao(const Vector2& pos);
+		void definirTamanho(const Vector2<int>& tam);
+		void definirPosicao(const Vector2<int>& pos);
+		void adicionarTamanho(const Vector2<int>& tam);
+		void adicionarPosicao(const Vector2<int>& pos);
 
 		// Widgets
 		void adicionarWidget(std::shared_ptr<Widget> widget);
 
 		// Obtenção de Dados
 		Vector4<int> obterRetangulo() const;
-		Vector2 obterTamanhoMinimo() const;
+		Vector2<int> obterTamanhoMinimo() const;
 		std::shared_ptr<Contexto> obterContexto() const;
 
 		// Atualização e Renderização
@@ -40,7 +40,7 @@ namespace Interface
 		std::string nome() const { return Nome; }
 
 		// Estado Interno
-		Vector2 widgetPadding, posicaoWidget;
+		Vector2<int> widgetPadding, posicaoWidget;
 		Color arvoreCor{ 0.1f, 0.1f, 0.1f };
 
 		// Flags de Controle
@@ -71,7 +71,7 @@ namespace Interface
 
 		// Dados de Geometria
 		Vector4<int> retangulo;
-		Vector2 tamanhoMinimo;
+		Vector2<int> tamanhoMinimo;
 		bool renderizarCorpo{ true };
 
 	};

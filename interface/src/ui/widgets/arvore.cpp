@@ -9,7 +9,7 @@ Interface::Widgets::Arvore::Arvore(const std::string &l, bool* retorno) : retorn
 Interface::Widgets::Arvore::Arvore(std::shared_ptr<std::string> label, bool* retorno, const std::string& imagePath)
     : retorno(retorno)
 {
-    icone = std::make_unique<Imagem>(imagePath, Vector2{20, 20});
+    icone = std::make_unique<Imagem>(imagePath, Vector2<int>{20, 20});
     icone->padding = true;
 
     label_shared = label;
@@ -19,7 +19,7 @@ Interface::Widgets::Arvore::Arvore(std::shared_ptr<std::string> label, bool* ret
 Interface::Widgets::Arvore::Arvore(const std::string& label, bool* retorno, const std::string& imagePath)
     : retorno(retorno)
 {
-    icone = std::make_unique<Imagem>(imagePath, Vector2{ 20, 20 });
+    icone = std::make_unique<Imagem>(imagePath, Vector2<int>{ 20, 20 });
     icone->padding = true;
 
     frase = label;

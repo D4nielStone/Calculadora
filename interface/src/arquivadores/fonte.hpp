@@ -13,8 +13,8 @@ namespace Bubble
 		struct UI_DLL_API Character
 		{
 			uint TextureID;  // ID handle of the glyph texture
-			Vector2 Size;       // Size of glyph
-			Vector2 Bearing;    // Offset from baseline to left/top of glyph
+			Vector2<uint> Size;       // Size of glyph
+			Vector2<uint> Bearing;    // Offset from baseline to left/top of glyph
 			FT_Pos Advance;    // Offset to advance to next glyph
 		};
 		UI_DLL_API std::map<char32_t, Character>* obterCaracteres();

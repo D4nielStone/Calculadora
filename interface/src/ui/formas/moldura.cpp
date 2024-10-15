@@ -1,6 +1,8 @@
 #include "moldura.hpp"
 
-Interface::Formas::Moldura::Moldura(std::shared_ptr<Contexto> contexto, const Vector4<int>& retangulo)
+using namespace Interface::Formas;
+
+Moldura::Moldura(std::shared_ptr<Contexto> contexto, const Vector4<int>& retangulo)
 {
 	this->contexto = contexto;
 	this->retangulo = retangulo;
@@ -15,7 +17,29 @@ Interface::Formas::Moldura::Moldura(std::shared_ptr<Contexto> contexto, const Ve
 	linha_c->defCor({ 0.55f, 0.55f, 0.55f });
 }
 
-void Interface::Formas::Moldura::atualizar()
+Moldura& Moldura::operator=(const Moldura& other)
+{
+	// Evitar auto-atribuição
+	if (this == &other)
+		return *this;
+
+	// Copiar os atributos da classe base (Rect)
+	Rect::operator=(other);
+
+	// Copiar os atributos da classe Moldura
+	this->posicaoWidget = other.posicaoWidget;
+	this->ocultar_linhas = other.ocultar_linhas;
+
+	// Copiar os ponteiros únicos para Linhas (clonar os objetos)
+	this->linha_d = other.linha_d ? std::make_unique<Linha>(*other.linha_d) : nullptr;
+	this->linha_e = other.linha_e ? std::make_unique<Linha>(*other.linha_e) : nullptr;
+	this->linha_c = other.linha_c ? std::make_unique<Linha>(*other.linha_c) : nullptr;
+	this->linha_b = other.linha_b ? std::make_unique<Linha>(*other.linha_b) : nullptr;
+
+	return *this;
+}
+
+void Moldura::atualizar()
 {
 	preAtualizacao();
 	Rect::atualizar();
@@ -58,7 +82,7 @@ void Interface::Formas::Moldura::atualizar()
 	posAtualizacao();
 }
 
-void Interface::Formas::Moldura::renderizar() const
+void Moldura::renderizar() const
 {
 	Rect::renderizar();
 	if (ocultar_linhas)return;
@@ -68,7 +92,7 @@ void Interface::Formas::Moldura::renderizar() const
 	linha_b->renderizar();
 }
 
-std::shared_ptr<Interface::Contexto> Interface::Formas::Moldura::obtCtx() const
+std::shared_ptr<Interface::Contexto> Moldura::obtCtx() const
 {
 	return contexto;
 }

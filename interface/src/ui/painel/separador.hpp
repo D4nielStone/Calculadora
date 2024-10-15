@@ -24,7 +24,7 @@ namespace Interface
 		Painel* painel = nullptr;
 		const Lado lado;
 		bool mouse_1click, arrastando;
-		Vector2 arrasto_pos, mouse_pos_ini;
+		Vector2<int> arrasto_pos, mouse_pos_ini;
 		void atualizarColisao();
 		void atualizarCursor();
 		void atualizarArrasto();

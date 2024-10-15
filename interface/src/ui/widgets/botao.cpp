@@ -14,7 +14,7 @@ Interface::Widgets::Botao::
 Botao(const std::string &label_shared, std::function<void()> function, const std::string& imagePath, bool completo) : completo(completo)
 ,   funcao_click_(function)
 {
-    icon = std::make_unique<Imagem>(imagePath, Vector2{ 20, 20 });
+    icon = std::make_unique<Imagem>(imagePath, Vector2<int>{ 20, 20 });
     cor = { 1, 1, 1 };
     frase = label_shared;
     configurar();
@@ -46,7 +46,7 @@ void Interface::Widgets::Botao::atualizar()
     else
     {
         moldura.defTam({ static_cast<int>(largura_texto + letra_padding.x * 2), static_cast<int>(box_size.y) });
-        colisao.defRect({ box_pos.x, box_pos.y, (int)largura_texto + letra_padding.x * 2, (int)box_size.y });
+        colisao.defRect({ box_pos.x, box_pos.y, static_cast<int>(largura_texto + letra_padding.x * 2), static_cast<int>(box_size.y) });
     }
     moldura.atualizar();
     //reseta gatilho

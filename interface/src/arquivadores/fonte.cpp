@@ -119,8 +119,8 @@ void Bubble::Arquivadores::definirResolucao(int resolution)
         // Armazenar o caractere para uso futuro
         Character character = {
             texture,
-            Vector2(face->glyph->bitmap.width, face->glyph->bitmap.rows),
-            Vector2(face->glyph->bitmap_left, face->glyph->bitmap_top),
+            Vector2<uint>(face->glyph->bitmap.width, face->glyph->bitmap.rows),
+            Vector2<uint>(face->glyph->bitmap_left, face->glyph->bitmap_top),
             face->glyph->advance.x
         };
         Characters.insert(std::make_pair(charcode, character));
@@ -161,8 +161,8 @@ void Bubble::Arquivadores::definirResolucao(int resolution)
     // Armazenar o caractere para uso futuro
     Character character = {
         texture,
-        Vector2(face->glyph->bitmap.width, face->glyph->bitmap.rows),
-        Vector2(face->glyph->bitmap_left, face->glyph->bitmap_top),
+        Vector2<uint>{face->glyph->bitmap.width, face->glyph->bitmap.rows},
+        Vector2<uint>{face->glyph->bitmap_left, face->glyph->bitmap_top},
         face->glyph->advance.x
     };
     Characters.insert(std::make_pair('¬', character));

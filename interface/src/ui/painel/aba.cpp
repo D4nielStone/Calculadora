@@ -14,7 +14,7 @@ Interface::Aba::Aba(Painel *painel)
 
 void Interface::Aba::atualizar()
 {
-    painel->posicaoWidget = { 0, -letra_padding.y*2 + 4 };
+    painel->posicaoWidget = { 0, -static_cast<int>(letra_padding.y*2) + 4 };
 
     renderizar_texto(frase);
 

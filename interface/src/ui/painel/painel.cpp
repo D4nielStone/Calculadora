@@ -1,4 +1,5 @@
 #include "painel.hpp"
+#include "src/util/includes.hpp"
 
 namespace Interface {
 
@@ -9,25 +10,25 @@ namespace Interface {
     }
 
     // Manipulação de Tamanho e Posição
-    void Painel::definirTamanho(const Vector2& tam)
+    void Painel::definirTamanho(const Vector2<int>& tam)
     {
         retangulo.w = tam.x;
         retangulo.h = tam.y;
     }
 
-    void Painel::definirPosicao(const Vector2& pos)
+    void Painel::definirPosicao(const Vector2<int>& pos)
     {
-        retangulo.x = static_cast<float>(pos.x);
-        retangulo.y = static_cast<float>(pos.y);
+        retangulo.x = pos.x;
+        retangulo.y = pos.y;
     }
 
-    void Painel::adicionarTamanho(const Vector2& tam)
+    void Painel::adicionarTamanho(const Vector2<int>& tam)
     {
         retangulo.w += tam.x;
         retangulo.h += tam.y;
     }
 
-    void Painel::adicionarPosicao(const Vector2& pos)
+    void Painel::adicionarPosicao(const Vector2<int>& pos)
     {
         retangulo.x += pos.x;
         retangulo.y += pos.y;
@@ -46,7 +47,7 @@ namespace Interface {
         return retangulo;
     }
 
-    Vector2 Painel::obterTamanhoMinimo() const
+    Vector2<int> Painel::obterTamanhoMinimo() const
     {
         return tamanhoMinimo;
     }

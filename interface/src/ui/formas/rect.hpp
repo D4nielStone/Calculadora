@@ -16,10 +16,10 @@ namespace Interface
 			Rect(std::shared_ptr<Contexto> ctx, const Vector4<int>& rect = {0, 0, 0, 0});
 			Vector4<int> obtRect() const;
 			Vector4<float> obtRectNDC() const;
-			void defTam(const Vector2 &tam);
-			void defPos(const Vector2 &pos);
-			void adiTam(const Vector2 &tam);
-			void adiPos(const Vector2 &tam);
+			void defTam(const Vector2<int> &tam);
+			void defPos(const Vector2<int> &pos);
+			void adiTam(const Vector2<int> &tam);
+			void adiPos(const Vector2<int> &tam);
 			void defCor(const Color &cor);
 			virtual void atualizar();
 			virtual void renderizar() const;
